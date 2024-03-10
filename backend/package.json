@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Backend of blog website",
+  "main": "index.js",
+  "repository": "https://github.com/DanielRasho/lab6-blog",
+  "author": "Daniel Rayo",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "eslint": "^8.57.0",
+    "nodemon": "^3.1.0"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "eslintConfig": {
+    "rules": {
+      "semi": [
+        "error",
+        "always"
+      ],
+      "quotes": [
+        "error",
+        "double"
+      ]
+    }
+  }
+}
