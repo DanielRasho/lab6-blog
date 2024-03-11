@@ -6,15 +6,15 @@
 
 Made with [Node.js](https://nodejs.org/en) and [React](https://es.react.dev/) 
 
-?”´ **Live API:** Doing..
+?  **Live API:** Doing..
 
-Made with ?’š by Daniel Rayo
+Made with ? by Daniel Rayo
 
 ---
 
 ## Running the Project
 
-### Backend ?–¥?¸?
+### Backend ?
 
 1. **Create the DB:** The backend requires a functional Docker Container with postgres, for that, run the following commands in shell.<u> This will need to be done only once.</u>
    
@@ -44,6 +44,6 @@ Made with ?’š by Daniel Rayo
    yarn start     # if using yarn
    ```
 
-### Frontend ?’«
+### Frontend ?
 
 Working on it...BrushWire
