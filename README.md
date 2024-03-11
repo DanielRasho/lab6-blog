@@ -1,22 +1,20 @@
 <div align = "center">
-  <img src="./brushWireLogo.png" width="100px"><h1 align="center"> 
-  <h1 align="center" style="font-style:italic;">
-  BrushWire</h1>
+  <img src="./brushWireLogo.png" width="300px"><h1 align="center"> 
     <h5 align="center"> <i style="color:grey;"> 
    A blog for inspired artists</i> </h5>
 </div>
 
 Made with [Node.js](https://nodejs.org/en) and [React](https://es.react.dev/) 
 
-ğŸ”´ **Live API:** Doing..
+?”´ **Live API:** Doing..
 
-Made with ğŸ’š by Daniel Rayo
+Made with ?’š by Daniel Rayo
 
 ---
 
 ## Running the Project
 
-### Backend ğŸ–¥ï¸
+### Backend ?–¥?¸?
 
 1. **Create the DB:** The backend requires a functional Docker Container with postgres, for that, run the following commands in shell.<u> This will need to be done only once.</u>
    
@@ -46,6 +44,6 @@ Made with ğŸ’š by Daniel Rayo
    yarn start     # if using yarn
    ```
 
-### Frontend ğŸ’«
+### Frontend ?’«
 
-Working on it...
+Working on it...BrushWire
