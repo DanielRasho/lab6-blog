@@ -6,9 +6,9 @@
 
 Made with [Node.js](https://nodejs.org/en) and [React](https://es.react.dev/) 
 
-?  **Live API:** Doing..
+🔴 **Live API:** Doing..
 
-Made with ? by Daniel Rayo
+Made with 💚 by Daniel Rayo
 
 ---
 
