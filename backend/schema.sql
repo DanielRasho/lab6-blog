@@ -1,3 +1,9 @@
+
+-- Connect to Database
+-- /c blogs_db
+
+
+-- Create tables
 create table member (
 	username VARCHAR(30) primary key,
 	password VARCHAR(30) not null
@@ -14,8 +20,6 @@ create table post (
 		references member(username)
 		on delete cascade
 );
-
-drop table post, member;
 
 -- Dummy Data
 INSERT INTO member (username, password)

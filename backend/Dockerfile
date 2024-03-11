@@ -2,15 +2,15 @@
 FROM postgres:latest
 
 # POSTGRES VARIABLES
-ENV POSTGRES_PASSWORD=1234
 ENV POSTGRES_USER=admin
+ENV POSTGRES_PASSWORD=1234
 ENV POSTGRES_DB=blogs_db
+
+# INITIALIZE VALUES
+COPY schema.sql /docker-entrypoint-initdb.d/
 
 # PORT EXPOSED
 EXPOSE 5432/tcp
-
-# INITIALIZE VALUES
-COPY schema.sql /docker-entrypoint-initdb.d/schema.sql
 
 
 
