@@ -32,6 +32,6 @@
     "nodemon": "^3.1.0"
   },
   "lint-staged": {
-    "**/*.js": "prettier --write"
+    "**/*.js": ["prettier --write"]
   }
 }
