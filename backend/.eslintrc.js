@@ -21,6 +21,7 @@ module.exports = {
   },
   ignorePatterns: ['static/docs'],
   rules: {
+    'no-console': 'off',
     semi: ['error', 'never'], // Not yelling when semicolons
     '@stylistic/js/indent': ['error', 2],
     'prettier/prettier': ['error'],
