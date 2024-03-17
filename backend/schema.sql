@@ -1,8 +1,3 @@
-
--- Connect to Database
--- /c blogs_db
-
-
 -- Create tables
 create table member (
 	username VARCHAR(30) primary key,
