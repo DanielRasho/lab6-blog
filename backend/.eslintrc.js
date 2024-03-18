@@ -24,6 +24,7 @@ module.exports = {
     'no-console': 'off',
     semi: ['error', 'never'], // Not yelling when semicolons
     '@stylistic/js/indent': ['error', 2],
+    '@stylistic/js/max-len': ['error', { code: 100 }],
     'prettier/prettier': ['error'],
   },
 }
