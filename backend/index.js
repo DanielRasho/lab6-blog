@@ -6,6 +6,7 @@ const app = express()
 const userRouter = require('./src/routes/user')
 const loginRouter = require('./src/routes/login')
 const signUpRouter = require('./src/routes/signup')
+const blogRouter = require('./src/routes/blog')
 
 const { PORT } = process.env
 
@@ -32,6 +33,7 @@ app.use(loggerMiddleware) // <- Using logger interceptor
 app.use('/user', userRouter)
 app.use('/login', loginRouter)
 app.use('/signUp', signUpRouter)
+app.use('/', blogRouter)
 
 app.listen(PORT, () => {
   Logger.info(`Server listening on port ${PORT}`)
