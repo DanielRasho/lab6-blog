@@ -117,10 +117,12 @@ userRouter.post('/posts', authenticateToken, async (req, res) => {
 
 userRouter.put('/posts', authenticateToken, async (req, res) => {
   const post = req.body
-  if (req.user != req.body.author) {
-    return res.status(400).json({ message: 'User most be author of the edited post' })
-  } else if (!post.id || !post.tags || !post.thumbnail || !post.content) {
+  if (!post.author || !post.id || !post.tags || !post.thumbnail || !post.content) {
     return res.status(400).json({ message: 'Some fields are empty. Cant update post' })
+  } else if (req.user != post.author) {
+    return res.status(400).json({ message: 'User most be author of the edited post' })
+  } else if (!post.author || !post.id || !post.tags || !post.thumbnail || !post.content) {
+    return res.status(400).json({ message: 'User most be author of the edited post' })
   } else {
     console.log(post.thumbnail)
     await pool.query(
@@ -138,6 +140,25 @@ userRouter.put('/posts', authenticateToken, async (req, res) => {
       ]
     )
     return res.status(200).json({ message: 'Post updated' })
+  }
+})
+
+userRouter.delete('/posts/:id', authenticateToken, async (req, res) => {
+  const postId = req.params.id
+
+  if (!postId) {
+    return res.status(400).json({ message: 'Post id not sended.' })
+  }
+
+  const DBPost = (await pool.query(`SELECT author FROM post WHERE id=$1`, [postId])).rows[0]
+
+  if (!DBPost) {
+    return res.status(400).json({ message: 'Post with given id does not exist.' })
+  } else if (req.user != DBPost.author) {
+    return res.status(400).json({ message: 'User most be author of the edited post' })
+  } else {
+    await pool.query(`DELETE FROM post WHERE id = $1`, [postId])
+    return res.status(200).json({ message: 'Post deleted' })
   }
 })
 
