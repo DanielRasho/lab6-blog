@@ -19,7 +19,9 @@ userRouter.get('/', authenticateToken, async (req, res) => {
 
 userRouter.get('/posts', authenticateToken, async (req, res) => {
   const DBData = await pool.query(
-    `SELECT author, 
+    `SELECT 
+      id,
+      author, 
       tags, 
       publish_date, 
       thumbnail_path 
@@ -30,8 +32,8 @@ userRouter.get('/posts', authenticateToken, async (req, res) => {
 
   // Fetching all posts from user
   posts = DBData.rows.map((row) => {
-    const { author, tags, publish_date, thumbnail_path } = row
-    return new PostDetails(author, tags.split(','), publish_date, thumbnail_path)
+    const { id, author, tags, publish_date, thumbnail_path } = row
+    return new PostDetails(id, author, tags.split(','), publish_date, thumbnail_path)
   })
 
   res.status(200).json({ posts })
