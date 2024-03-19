@@ -14,15 +14,16 @@ const { PORT } = process.env
 const loggerMiddleware = (req, res, next) => {
   const originalSend = res.send
 
+  // Overriding res.send function
   res.send = function (body) {
-    Logger.info({ 
+    Logger.info({
       request: { method: req.method, url: req.originalUrl, body: req.body },
-      response: { status: res.statusCode , body }
+      response: { status: res.statusCode, body },
     })
-    
-    originalSend.call(this, body);
+
+    originalSend.call(this, body)
   }
-  
+
   next()
 }
 

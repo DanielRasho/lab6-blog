@@ -1,7 +1,7 @@
 /**
  * Representation of the metadata of a post without its actual content.
  */
-export default class PostDetails {
+class PostDetails {
   /**
    *
    * @param {string} author
@@ -16,3 +16,5 @@ export default class PostDetails {
     this.thumbnailPath = thumbnailPath
   }
 }
+
+module.exports = PostDetails
