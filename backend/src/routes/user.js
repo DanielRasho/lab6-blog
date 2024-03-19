@@ -5,6 +5,8 @@ const { pool, existOnlyOne } = require('../db')
 const User = require('../models/user')
 const PostDetails = require('../models/postDetails')
 const fileManager = require('../fileManager')
+const Post = require('../models/post')
+const { log } = require('winston')
 
 const userRouter = express.Router()
 
@@ -22,7 +24,8 @@ userRouter.get('/posts', authenticateToken, async (req, res) => {
   const DBData = await pool.query(
     `SELECT 
       id,
-      author, 
+      author,
+      title,
       tags, 
       publish_date, 
       thumbnail_path
@@ -33,10 +36,11 @@ userRouter.get('/posts', authenticateToken, async (req, res) => {
 
   // Fetching all posts from user
   posts = DBData.rows.map((row) => {
-    const { id, author, tags, publish_date, thumbnail_path } = row
+    const { id, author, title, tags, publish_date, thumbnail_path } = row
     return new PostDetails(
       id,
       author,
+      title,
       tags.split(','),
       publish_date,
       fileManager.searchImage(thumbnail_path)
@@ -44,6 +48,44 @@ userRouter.get('/posts', authenticateToken, async (req, res) => {
   })
 
   res.status(200).json({ posts })
+})
+
+userRouter.get('/posts/:id', async (req, res) => {
+  const postId = req.params.id
+
+  if (!postId) {
+    return res.status(400).json({ message: 'Post id not sended.' })
+  }
+
+  const response = await pool.query(
+    `
+  SELECT 
+  id,
+  author,
+  title,
+  tags,
+  publish_date,
+  thumbnail_path,
+  content_path
+  FROM post WHERE id = $1`,
+    [postId]
+  )
+
+  if (response.rows == 0) {
+    return res.status(400).json({ message: `Post with id ${postId} does not exist` })
+  } else {
+    const { id, author, title, tags, publish_date, thumbnail_path, content_path } = response.rows[0]
+    const post = new Post(
+      id,
+      author,
+      title,
+      tags.split(','),
+      publish_date,
+      fileManager.searchImage(thumbnail_path),
+      fileManager.searchDocument(content_path)
+    )
+    return res.status(200).json({ message: 'Post found', post })
+  }
 })
 
 userRouter.post('/posts', authenticateToken, async (req, res) => {
