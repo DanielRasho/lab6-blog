@@ -38,4 +38,35 @@ blogRouter.get('/', async (req, res) => {
   res.status(200).json({ posts })
 })
 
+blogRouter.get('/search/:query', async (req, res) => {
+  const query = req.params.query
+
+  const response = await pool.query(
+    `
+  SELECT 
+  id,
+  author,
+  title,
+  tags,
+  publish_date,
+  thumbnail_path,
+  content_path
+  FROM post WHERE title ILIKE '%${query}%'`
+  )
+
+  const posts = response.rows.map((row) => {
+    const { id, author, title, tags, publish_date, thumbnail_path, content_path } = row
+    return new Post(
+      id,
+      author,
+      title,
+      tags.split(','),
+      publish_date,
+      fileManager.searchImage(thumbnail_path),
+      fileManager.searchDocument(content_path)
+    )
+  })
+  return res.status(200).json({ message: 'Post found', posts })
+})
+
 module.exports = blogRouter
