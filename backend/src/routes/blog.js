@@ -69,4 +69,38 @@ blogRouter.get('/search/:query', async (req, res) => {
   return res.status(200).json({ message: 'Post found', posts })
 })
 
+blogRouter.get('/post/:id', async (req, res) => {
+  const postId = req.params.id
+
+  const response = await pool.query(
+    `
+  SELECT 
+  id,
+  author,
+  title,
+  tags,
+  publish_date,
+  thumbnail_path,
+  content_path
+  FROM post WHERE id = $1`,
+    [postId]
+  )
+
+  if (response.rows == 0) {
+    return res.status(400).json({ message: `Post with id ${postId} does not exist` })
+  } else {
+    const { id, author, title, tags, publish_date, thumbnail_path, content_path } = response.rows[0]
+    const post = new Post(
+      id,
+      author,
+      title,
+      tags.split(','),
+      publish_date,
+      fileManager.searchImage(thumbnail_path),
+      fileManager.searchDocument(content_path)
+    )
+    return res.status(200).json({ message: 'Post found', post })
+  }
+})
+
 module.exports = blogRouter

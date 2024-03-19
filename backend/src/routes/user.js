@@ -6,7 +6,6 @@ const User = require('../models/user')
 const PostDetails = require('../models/postDetails')
 const fileManager = require('../fileManager')
 const Post = require('../models/post')
-const { log } = require('winston')
 
 const userRouter = express.Router()
 
