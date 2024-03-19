@@ -39,8 +39,8 @@ userRouter.get('/posts', authenticateToken, async (req, res) => {
     const { id, author, title, tags, publish_date, thumbnail_path } = row
     return new PostDetails(
       id,
-      author,
       title,
+      author,
       tags.split(','),
       publish_date,
       fileManager.searchImage(thumbnail_path)
@@ -109,9 +109,35 @@ userRouter.post('/posts', authenticateToken, async (req, res) => {
       ` 
     INSERT INTO post (author, title, tags, thumbnail_path, content_path)
     VALUES ($1::text, $2::text, $3::text, $4::text, $5::text)`,
-      [author, title, tags, thumbnailPath, contentPath]
+      [author, title, tags.join(','), thumbnailPath, contentPath]
     )
     res.status(200).json({ message: 'Post created' })
+  }
+})
+
+userRouter.put('/posts', authenticateToken, async (req, res) => {
+  const post = req.body
+  if (req.user != req.body.author) {
+    return res.status(400).json({ message: 'User most be author of the edited post' })
+  } else if (!post.id || !post.tags || !post.thumbnail || !post.content) {
+    return res.status(400).json({ message: 'Some fields are empty. Cant update post' })
+  } else {
+    console.log(post.thumbnail)
+    await pool.query(
+      ` 
+    UPDATE post SET 
+    tags = $1::text,
+    thumbnail_path = $2::text,
+    content_path = $3::text
+    WHERE id = $4`,
+      [
+        post.tags.join(','),
+        fileManager.saveImage(post.author, post.title, post.thumbnail),
+        fileManager.saveDocument(post.author, post.title, post.content),
+        post.id,
+      ]
+    )
+    return res.status(200).json({ message: 'Post updated' })
   }
 })
 
