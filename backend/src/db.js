@@ -11,4 +11,16 @@ const pool = new Pool({
   connectionTimeoutMillis: 1000,
 })
 
-module.exports = pool
+/**
+ * Check if a query return only one row
+ * @param {Pool} pool pool object
+ * @param {*} query query to execute
+ * @param {*} parameters parameters for query
+ * @returns True if exist only one row
+ */
+async function existOnlyOne(pool, query, parameters) {
+  const DBData = await pool.query(query, parameters)
+  return DBData.rowCount == 1
+}
+
+module.exports = { pool, existOnlyOne }

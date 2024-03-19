@@ -1,7 +1,7 @@
 const express = require('express')
 const Logger = require('../Logger')
 const { createToken, authenticateToken } = require('../authentication')
-const pool = require('../db')
+const { pool } = require('../db')
 const User = require('../models/user')
 const PostDetails = require('../models/postDetails')
 
