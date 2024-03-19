@@ -16,15 +16,15 @@ Made with 💚 by Daniel Rayo
 
 ### Backend 🔌
 
-1. **Create the DB:** The backend requires a functional Docker Container with postgres, for that, run the following commands in shell.<u> This will need to be done only once.</u>
+1. **Create the DB:** The backend requires a functional Docker Container with postgres, for that, you must create it from the dockerfile in the repo.<u> Important: This will need to be done only once.</u>
    
    ```bash
    cd ./backend
    docker build -t brushwire-blog -f ./Dockerfile .
-   docker docker run --name brushwire -p 5433:5432 -d brushwire-blog:latest
+   docker run --name brushwire -p 5433:5432 -d brushwire-blog:latest
    ```
 
-2. **Run the container**: For the API to connect to the DB the container must be running, for that run:
+2. **Run the container**: In order or the API to communicate with the DB, the container must be running, for that execute:
    
    ```bash
    docker start brushwire
@@ -36,12 +36,21 @@ Made with 💚 by Daniel Rayo
    npm install    # if using npm
    yarn install   # if using yarn
    ```
-
-4. **Start API:** Finally start the API to start listening.
+5. **Set environment variables:** The API extract important configuration from environment variables declared in a `.env` file. Create one within /backend directory with this variables. You can change them to your like.
+   ```bash
+   PORT=3000
+   LOG_LEVEL='info'
+   JWT_SECRET='superSecretPassword'
+   STORE_DIR='/path/to/folder/where/blog/files/are/stored'
+   ```
+   
+6. **Start API:** Finally you can start the API service by executing:
    
    ```bash
    npm start      # if using npm
    yarn start     # if using yarn
+   npm dev        # For development
+   yarn dev       # For develpment
    ```
 
 ### Frontend 💫
