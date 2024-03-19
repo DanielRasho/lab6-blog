@@ -10,7 +10,7 @@ signUpRouter.post('/', async (req, res) => {
   const { username, password } = req.body
 
   if (!username || !password) {
-    res.status(401).json({ message: 'Username or password not send' })
+    return res.status(401).json({ message: 'Username or password not send' })
   }
 
   const userExist = await existOnlyOne(pool, 'SELECT * FROM member WHERE username = $1::text', [

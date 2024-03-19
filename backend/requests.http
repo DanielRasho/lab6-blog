@@ -1,0 +1,8 @@
+
+POST http://localhost:3000/signup username=dummy password=123
+
+POST http://localhost:3000/login username=dummy password=123
+
+GET http://localhost:3000/user authorization:eyJhbGciOiJIUzI1NiJ9.ZHVtbXk.5YLRDmkxI-yFoKyJ20GWUlnZ9NpArGfKXGfkWlAVYRk
+
+GET http://localhost:3000/user/posts authorization:eyJhbGciOiJIUzI1NiJ9.ZHVtbXk.5YLRDmkxI-yFoKyJ20GWUlnZ9NpArGfKXGfkWlAVYRk
