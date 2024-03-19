@@ -9,7 +9,8 @@ class PostDetails {
    * @param {string} publish_date
    * @param {string} thumbnail_path server file path to post's thumbnail
    */
-  constructor(author, tags, publishDate, thumbnailPath) {
+  constructor(id, author, tags, publishDate, thumbnailPath) {
+    this.id = id
     this.author = author
     this.tags = tags
     this.publishDate = publishDate

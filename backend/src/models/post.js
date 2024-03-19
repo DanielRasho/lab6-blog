@@ -1,7 +1,7 @@
 /**
  * Definition of a Post object
  */
-export default class Post {
+class Post {
   /**
    *
    * @param {string} author
@@ -10,7 +10,8 @@ export default class Post {
    * @param {string} thumbnailPath server file path to post's thumbnail
    * @param {string} contentPath server file path to post's content
    */
-  constructor(author, tags, publishDate, thumbnailPath, contentPath) {
+  constructor(id, author, tags, publishDate, thumbnailPath, contentPath) {
+    this.id = id
     this.author = author
     this.tags = tags
     this.publishDate = publishDate
@@ -18,3 +19,5 @@ export default class Post {
     this.contentPath = contentPath
   }
 }
+
+module.exports = Post
