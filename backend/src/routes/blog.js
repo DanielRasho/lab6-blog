@@ -39,7 +39,7 @@ blogRouter.get('/', async (req, res) => {
 })
 
 blogRouter.get('/search/:query', async (req, res) => {
-  const query = req.params.query
+  const query = req.params.query.replace('%20', ' ')
 
   const response = await pool.query(
     `

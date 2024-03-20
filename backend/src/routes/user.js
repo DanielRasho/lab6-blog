@@ -88,27 +88,28 @@ userRouter.get('/posts/:id', async (req, res) => {
 })
 
 userRouter.post('/posts', authenticateToken, async (req, res) => {
-  const { author, title, tags, thumbnail, content } = req.body
-  if (!author || !tags || !thumbnail || !content) {
+  const { title, tags, thumbnail, content } = req.body
+
+  if (!title || !tags || !thumbnail || !content) {
     return res.status(400).json({ message: 'Some fields are empty, cant create post.' })
   }
 
   const postExist = await existOnlyOne(
     pool,
     `SELECT * FROM post WHERE author = $1::text AND title = $2::text`,
-    [author, title]
+    [req.user, title]
   )
 
   if (postExist) {
     res.status(400).json({ message: 'Post already exist' })
   } else {
-    const thumbnailPath = fileManager.saveImage(author, title, thumbnail)
-    const contentPath = fileManager.saveDocument(author, title, content)
+    const thumbnailPath = fileManager.saveImage(req.user, title, thumbnail)
+    const contentPath = fileManager.saveDocument(req.user, title, content)
     await pool.query(
       ` 
     INSERT INTO post (author, title, tags, thumbnail_path, content_path)
     VALUES ($1::text, $2::text, $3::text, $4::text, $5::text)`,
-      [author, title, tags.join(','), thumbnailPath, contentPath]
+      [req.user, title, tags.join(','), thumbnailPath, contentPath]
     )
     res.status(200).json({ message: 'Post created' })
   }
@@ -116,30 +117,33 @@ userRouter.post('/posts', authenticateToken, async (req, res) => {
 
 userRouter.put('/posts', authenticateToken, async (req, res) => {
   const post = req.body
-  if (!post.author || !post.id || !post.tags || !post.thumbnail || !post.content) {
+  if (!post.id || !post.tags || !post.thumbnail || !post.content) {
     return res.status(400).json({ message: 'Some fields are empty. Cant update post' })
-  } else if (req.user != post.author) {
-    return res.status(400).json({ message: 'User most be author of the edited post' })
-  } else if (!post.author || !post.id || !post.tags || !post.thumbnail || !post.content) {
-    return res.status(400).json({ message: 'User most be author of the edited post' })
-  } else {
-    console.log(post.thumbnail)
-    await pool.query(
-      ` 
+  }
+
+  const DBauthor = await (
+    await pool.query(`SELECT author FROM post WHERE id = $1`, [post.id])
+  ).rows[0].author
+
+  if (req.user != DBauthor) {
+    return res.status(400).json({ message: 'You cannot edit post that are not yours.' })
+  }
+
+  await pool.query(
+    ` 
     UPDATE post SET 
     tags = $1::text,
     thumbnail_path = $2::text,
     content_path = $3::text
     WHERE id = $4`,
-      [
-        post.tags.join(','),
-        fileManager.saveImage(post.author, post.title, post.thumbnail),
-        fileManager.saveDocument(post.author, post.title, post.content),
-        post.id,
-      ]
-    )
-    return res.status(200).json({ message: 'Post updated' })
-  }
+    [
+      post.tags.join(','),
+      fileManager.saveImage(req.user, post.title, post.thumbnail),
+      fileManager.saveDocument(req.user, post.title, post.content),
+      post.id,
+    ]
+  )
+  return res.status(200).json({ message: 'Post updated' })
 })
 
 userRouter.delete('/posts/:id', authenticateToken, async (req, res) => {
