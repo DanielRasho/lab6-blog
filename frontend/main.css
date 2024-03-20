@@ -1,0 +1,9 @@
+@import url(./src/styles/colors.css);
+@import url(./src/styles/typography.css);
+
+* {
+    box-sizing: border-box;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
