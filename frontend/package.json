@@ -1,9 +1,0 @@
-{
-  "name": "frontend",
-  "version": "1.0.0",
-  "description": "Frontend code for blog",
-  "main": "index.js",
-  "repository": "https://github.com/DanielRasho/lab6-blog",
-  "author": "Daniel Rayo",
-  "license": "MIT"
-}
