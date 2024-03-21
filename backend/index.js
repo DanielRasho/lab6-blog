@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express')
+const cors = require('cors')
 const Logger = require('./src/Logger')
 
 const app = express()
@@ -28,6 +29,7 @@ const loggerMiddleware = (req, res, next) => {
   next()
 }
 
+app.use(cors())
 app.use(express.json())
 app.use(loggerMiddleware) // <- Using logger interceptor
 app.use('/user', userRouter)
