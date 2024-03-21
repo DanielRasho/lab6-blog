@@ -1,3 +1,5 @@
 function Home(){
-    return <div> HELLO</div>
+    return <div> 
+        <TopBar></TopBar>
+    </div>
 }
