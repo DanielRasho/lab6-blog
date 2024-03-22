@@ -8,7 +8,14 @@ function Home(){
             <button>
                 <img src="./media/brushWireLogo.png" alt="BrushWire Logo" />
             </button>
-            <input type="text"/>
+
+            <div class="search-bar">
+                <input class="search-input" type="text" placeholder="Search" />
+                <button class="search-submit" type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+
             <ButtonSimple>Home</ButtonSimple>
             <ButtonSimple onClick={() => setCurrentView('login')}>Login</ButtonSimple>
             <ButtonImportant > 
