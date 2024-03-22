@@ -18,6 +18,10 @@
     font-family: 'Noto Serif', 'Times New Roman', Times, serif;
 }
 
+.font-btn{
+    font-size: 1.1rem;
+}
+
 .font-card-title{
     font-family: 1.1rem;
     font-weight: bold;
