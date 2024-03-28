@@ -1,36 +1,20 @@
+function Home() {
+  const { currentView, navigate } = React.useContext(CURRENT_VIEW_CONTEXT);
 
-function Home(){
-    const {currentView, setCurrentView} = React.useContext(CURRENT_VIEW_CONTEXT)
+  const navLinks = [
+    {
+      content: "Trending",
+      onClick: () => navigate(VIEW_ROUTES.HOME),
+    },
+    {
+      content: "About Us",
+      onClick: () => navigate(VIEW_ROUTES.HOME),
+    },
+  ];
 
-    return (
-    <> 
-        <nav className="topBar">
-            <button>
-                <img src="./media/brushWireLogo.png" alt="BrushWire Logo" />
-            </button>
-
-            <div class="search-bar">
-                <input class="search-input" type="text" placeholder="Search" />
-                <button class="search-submit" type="submit">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </div>
-
-            <ButtonSimple>Home</ButtonSimple>
-            <ButtonSimple onClick={() => setCurrentView('login')}>Login</ButtonSimple>
-            <ButtonImportant > 
-                <i class="fa-solid fa-arrow-right"></i>
-                <span>Sign Up</span>
-                <i class="fa-solid fa-arrow-right"></i>
-            </ButtonImportant>
-        </nav>
-    </>)
-}
-
-Home.propTypes = { 
-    color : PropTypes.number
-}
-
-Home.defaultProps = {
-    color : 'adios'
+  return (
+    <>
+      <TopBar navLinks={navLinks} owo={["hello", "adios"]} />
+    </>
+  );
 }

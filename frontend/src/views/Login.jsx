@@ -1,8 +1,9 @@
+function Login() {
+  const { navigate } = React.useContext(CURRENT_VIEW_CONTEXT);
 
-function Login (){
-    const {currentView, setCurrentView} = React.useContext(CURRENT_VIEW_CONTEXT)
+  const handleOnClick = (e) => {
+    navigate("home");
+  };
 
-    const handleOnClick = (e) => { setCurrentView('home') }
-
-    return (<div onClick={handleOnClick}> HOME </div>) 
+  return <div onClick={handleOnClick}> HOME </div>;
 }
