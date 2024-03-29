@@ -1,5 +1,5 @@
-function ButtonSimple ({children, onClick}){
-    return <button onClick={onClick} className="btn-simple font-btn"> 
+function ButtonSimple ({children, style, onClick}){
+    return <button onClick={onClick} style={style} className="btn-simple font-btn"> 
         {children} 
     </button>
 }

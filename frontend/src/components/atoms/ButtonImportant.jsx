@@ -1,5 +1,5 @@
-function ButtonImportant({children}){
-    return <button className="btn-important font-btn"> 
+function ButtonImportant({children, onClick}){
+    return <button onClick={onClick} className="btn-important font-btn"> 
         {children} 
     </button>
 }

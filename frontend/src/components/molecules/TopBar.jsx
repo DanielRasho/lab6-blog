@@ -31,6 +31,8 @@ function TopBar({ navLinks }) {
 }
 
 function LoginButtons({ isLogged }) {
+
+  const { navigate } = React.useContext(CURRENT_VIEW_CONTEXT);
   if (isLogged) {
     return (
       <ButtonImportant>
@@ -45,7 +47,7 @@ function LoginButtons({ isLogged }) {
         <ButtonSimple onClick={() => navigate(VIEW_ROUTES.LOGIN)}>
           Login
         </ButtonSimple>
-        <ButtonImportant>
+        <ButtonImportant onClick={() => navigate(VIEW_ROUTES.SIGNUP)}>
           <i class="fa-solid fa-arrow-right"></i>
           <span>Sign Up</span>
           <i class="fa-solid fa-arrow-right"></i>

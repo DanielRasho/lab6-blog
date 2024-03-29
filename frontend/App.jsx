@@ -6,16 +6,16 @@ const CURRENT_VIEW_CONTEXT = React.createContext({
 
 // Context for storing the current View to show.
 const AUTH_CONTEXT = React.createContext({
-  token: '',
+  token: "",
   setToken: (token) => {},
 });
 
 function RouterProvider({ children }) {
-  const [currentView, setCurrentView] = React.useState("home");
+  const [currentView, setCurrentView] = React.useState("signup");
 
   return (
     <CURRENT_VIEW_CONTEXT.Provider
-      value={{ currentView, navigate: setCurrentView }}
+      value={{ currentView: currentView, navigate: setCurrentView }}
     >
       {children}
     </CURRENT_VIEW_CONTEXT.Provider>
@@ -23,7 +23,7 @@ function RouterProvider({ children }) {
 }
 
 function OuthProvider({ children }) {
-  const [token, setOuthToken] = React.useState('');
+  const [token, setOuthToken] = React.useState("");
 
   React.useEffect(() => {
     const savedToken = localStorage.getItem("token");
