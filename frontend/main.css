@@ -134,20 +134,57 @@ body{
   background-color: transparent;
 }
 
-.post-card {
+.post-card,
+.post-user-card{
     background-color: white;
     border-radius: 1.5rem;
     box-shadow: 0 4px 10px rgba(0, 0, 0, .04), 0 1px 4px rgba(0, 0, 0, .03), 0 1px 2px rgba(0, 0, 0, .02);
     overflow: hidden;
-    max-width: 25rem;
     margin: 3ch;
     height: fit-content;
     transition: all ease-in 0.2s;
+}
+
+.post-card{
+    max-width: 25rem;
     cursor: pointer;
 }
 
-.post-card:hover{
+.post-card:hover,
+.post-user-card:hover{
     border-radius: 2rem;
+box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.post-user-card{
+    display: flex;
+    height: 9rem;
+    padding: 0.8rem;
+}
+
+.post-user-card-info{
+    display: flex;
+    margin-left: 3ch;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.post-user-card .image-container {
+    height: 100%;
+    width: 25%;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post-user-card .image-container img {
+    width: 100%;
+}
+
+.post-user-card:hover .image-container {
+    border-radius: 0.7rem;
 }
 
 .post-card-info {
@@ -155,7 +192,8 @@ body{
     padding: 1.5rem 1.5rem .7rem;
 }
 
-.post-card-info h3 {
+.post-card-info h3 ,
+.post-user-card-info h3{
     margin: 1.5ch 0;
 }
 
@@ -170,7 +208,7 @@ body{
     align-items: end;
 }
 
-.post-card .image-container img {
+.post-card .image-container img{
     pointer-events: none;
     width: 100%;
     transition: all ease-in 0.2s;
@@ -180,6 +218,33 @@ body{
 
 .post-card:hover .image-container img {
     transform: scale(1.15);
+}
+
+.post-user-card-info .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 20ch;
+    margin-right: 2ch;
+}
+
+.buttons button {
+    padding: 0.5rem;
+    border-radius: 0.45rem;
+}
+
+.buttons button:hover {
+    box-shadow: inset rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(25, 20, 53, 0.3) 0px 3px 7px -3px;
+}
+
+.buttons button:first-child{
+    background-color: var(--green);
+    color: white;
+}
+
+.buttons button:last-child{
+    background-color: var(--orange-500);
+    color: white;
 }
 
 .tag {
