@@ -133,3 +133,62 @@ body{
   font-size: 1rem;
   background-color: transparent;
 }
+
+.post-card {
+    background-color: white;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .04), 0 1px 4px rgba(0, 0, 0, .03), 0 1px 2px rgba(0, 0, 0, .02);
+    overflow: hidden;
+    max-width: 25rem;
+    margin: 3ch;
+    height: fit-content;
+    transition: all ease-in 0.2s;
+    cursor: pointer;
+}
+
+.post-card:hover{
+    border-radius: 2rem;
+}
+
+.post-card-info {
+    width: 100%;
+    padding: 1.5rem 1.5rem .7rem;
+}
+
+.post-card-info h3 {
+    margin: 1.5ch 0;
+}
+
+.post-card .image-container{
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+    padding: 1ch;
+    padding-right: 1ch;
+    padding-bottom: 1ch;
+    display: flex;
+    align-items: end;
+}
+
+.post-card .image-container img {
+    pointer-events: none;
+    width: 100%;
+    transition: all ease-in 0.2s;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+} 
+
+.post-card:hover .image-container img {
+    transform: scale(1.15);
+}
+
+.tag {
+    border: 1px solid #000;
+    border-color: rgba(0, 0, 0, .1);
+    color: var(--black-3-80);
+    font-weight: 500;
+    margin-right: 0.5ch;
+    border-radius: .5rem;
+    padding: .35rem .5rem .2rem;  
+    line-height: 1.1;
+}

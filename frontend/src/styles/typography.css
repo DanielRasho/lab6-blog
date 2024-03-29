@@ -23,12 +23,12 @@
 }
 
 .font-card-title{
-    font-family: 1.1rem;
-    font-weight: bold;
+    font-size: 1.5rem;
+    font-weight:600;
 }
 
 .font-card-tag{
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     font-weight: 300;
 }
 

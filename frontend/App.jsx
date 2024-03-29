@@ -11,7 +11,7 @@ const AUTH_CONTEXT = React.createContext({
 });
 
 function RouterProvider({ children }) {
-  const [currentView, setCurrentView] = React.useState("signup");
+  const [currentView, setCurrentView] = React.useState("home");
 
   return (
     <CURRENT_VIEW_CONTEXT.Provider
