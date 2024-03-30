@@ -1,5 +1,5 @@
 function Home() {
-  const { currentView, navigate } = React.useContext(CURRENT_VIEW_CONTEXT);
+  const { navigate } = React.useContext(ROUTER_CONTEXT);
 
   const navLinks = [
     {

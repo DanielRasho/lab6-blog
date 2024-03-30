@@ -1,6 +1,6 @@
 function SignUp (){
 
-  const { navigate } = React.useContext(CURRENT_VIEW_CONTEXT);
+  const { navigate } = React.useContext(ROUTER_CONTEXT);
 
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");

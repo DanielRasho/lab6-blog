@@ -1,5 +1,5 @@
 function TopBar({ navLinks }) {
-  const { navigate } = React.useContext(CURRENT_VIEW_CONTEXT);
+  const { navigate } = React.useContext(ROUTER_CONTEXT);
 
   let isLogged = React.useContext(AUTH_CONTEXT).token == '' ? false : true;
 
@@ -32,7 +32,7 @@ function TopBar({ navLinks }) {
 
 function LoginButtons({ isLogged }) {
 
-  const { navigate } = React.useContext(CURRENT_VIEW_CONTEXT);
+  const { navigate } = React.useContext(ROUTER_CONTEXT);
   if (isLogged) {
     return (
       <ButtonImportant>
