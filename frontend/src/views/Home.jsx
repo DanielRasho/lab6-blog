@@ -40,7 +40,7 @@ function Home() {
 
   return (
     <>
-      <TopBar navLinks={navLinks} owo={["hello", "adios"]} />
+      <TopBar navLinks={navLinks}/>
       {posts}
     </>
   );
