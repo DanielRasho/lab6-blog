@@ -35,7 +35,7 @@ function LoginButtons({ isLogged }) {
   const { navigate } = React.useContext(ROUTER_CONTEXT);
   if (isLogged) {
     return (
-      <ButtonImportant>
+      <ButtonImportant onClick={() => navigate(VIEW_ROUTES.USER)}>
         <i class="fa-solid fa-arrow-right"></i>
         <span>Profile</span>
         <i class="fa-solid fa-arrow-right"></i>

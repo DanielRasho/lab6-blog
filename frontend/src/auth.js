@@ -7,7 +7,7 @@ const AUTH_CONTEXT = React.createContext({
 
 
 function OuthProvider({ children }) {
-  const [token, setOuthToken] = React.useState("");
+  const [token, setOuthToken] = React.useState("eyJhbGciOiJIUzI1NiJ9.c21hdWc.7yGTYJRMY5cjXsuYKqtR2KIDwIwoa1opat7-3nUXdQw");
 
   React.useEffect(() => {
     const savedToken = localStorage.getItem("token");
