@@ -2,7 +2,7 @@ function Home() {
   const { navigate } = React.useContext(ROUTER_CONTEXT);
   const [isLoading, setIsLoading] = React.useState(false);
   const [isError, setIsError] = React.useState(false);
-  let [postsInfo, setPostsInfo] = React.useState([]);
+  const [postsInfo, setPostsInfo] = React.useState([]);
 
   const navLinks = [
     {
@@ -15,26 +15,25 @@ function Home() {
     },
   ];
 
-  React.useEffect(async () => {
-    try {
+  React.useEffect(() => {
       setIsLoading(true);
-      const response = await fetch("http://localhost:3000/", {
+      fetch("http://localhost:3000/", {
         method: "get",
         headers: { "Content-Type": "application/json" },
-      });
-      const data = await response.json();
-      setPostsInfo(data.posts);
-    } catch (error) {
-      setIsError(true)
-    } finally {
-      setIsLoading(false);
-    }
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setPostsInfo(data.posts);
+          setIsLoading(false);
+        })
+        .catch((err) => setIsError(true))
+        .finally(() => setIsLoading(false));
   }, []);
 
   let posts = postsInfo.map((post) => {
     return (
       <PostCard
-        id={post.id}
+        postId={post.id}
         date={formatDate(post.publishDate)}
         title={post.title}
         tags={post.tags}
@@ -56,14 +55,15 @@ function Home() {
       <div class="loader-container">
         <Loader isLoading={isLoading}></Loader>
       </div>
-    
+
       <div>
-        <ErrorLoading isError={isError} message="Something wrong happen. Unable to retrieve posts"></ErrorLoading>
+        <ErrorLoading
+          isError={isError}
+          message="Something wrong happen. Unable to retrieve posts"
+        ></ErrorLoading>
       </div>
 
-      <div class="post-container">
-        {posts}
-        </div>
+      <div class="post-container">{posts}</div>
       <Footer></Footer>
     </>
   );
@@ -71,6 +71,6 @@ function Home() {
 
 function formatDate(dateString) {
   const date = new Date(dateString);
-  const options = { month: 'short', day: '2-digit', year: 'numeric' };
-  return date.toLocaleDateString('en-US', options);
+  const options = { month: "short", day: "2-digit", year: "numeric" };
+  return date.toLocaleDateString("en-US", options);
 }

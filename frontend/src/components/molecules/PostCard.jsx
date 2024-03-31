@@ -1,4 +1,4 @@
-function PostCard({date, title, tags, thumbnail}) {
+function PostCard({postId, date, title, tags, thumbnail}) {
     let displayTags = tags.map(tag => {
         return <PostTag>{tag}</PostTag>
     })
