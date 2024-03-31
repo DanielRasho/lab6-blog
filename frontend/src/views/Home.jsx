@@ -42,6 +42,7 @@ function Home() {
     <>
       <TopBar navLinks={navLinks}/>
       {posts}
+      <Footer></Footer>
     </>
   );
 }

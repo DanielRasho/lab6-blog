@@ -4,13 +4,14 @@
 }
 
 .font-display{
-    font-size: 3rem;
+    font-size: 4.5rem;
     font-weight: bold;
 }
 
 .font-subDisplay{
-    font-size: 2rem;
+    font-size: 3rem;
     font-family: 'Noto Serif', 'Times New Roman', Times, serif;
+    font-weight: 400;
 }
 
 .font-title{
