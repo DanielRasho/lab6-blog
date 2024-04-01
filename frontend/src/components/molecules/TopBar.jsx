@@ -1,4 +1,4 @@
-function TopBar({ navLinks }) {
+function TopBar({ navLinks = []}) {
   const { navigate } = React.useContext(ROUTER_CONTEXT);
 
   let isLogged = React.useContext(AUTH_CONTEXT).token == '' ? false : true;
