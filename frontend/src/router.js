@@ -3,6 +3,7 @@ const VIEW_ROUTES = Object.freeze({
   SIGNUP: "signup",
   USER: "user",
   POST: "post",
+  BLOG_EDITOR: "blog-editor",
   HOME: "home",
 });
 
@@ -14,7 +15,7 @@ const ROUTER_CONTEXT = React.createContext({
 });
 
 function RouterProvider({ children }) {
-  const [route, setRoute] = React.useState(VIEW_ROUTES.HOME);
+  const [route, setRoute] = React.useState(VIEW_ROUTES.USER);
   const [props, setProps] = React.useState({});
 
   const navigate = (route, props={}) => {
@@ -42,6 +43,8 @@ function Router() {
       return <SignUp {...props} />;
     case VIEW_ROUTES.USER:
       return <User {...props} />;
+    case VIEW_ROUTES.BLOG_EDITOR:
+      return <BlogEditor {...props} />;
     case VIEW_ROUTES.POST:
       return <Post {...props} />;
     case VIEW_ROUTES.HOME:

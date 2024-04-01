@@ -4,6 +4,7 @@
 @import url(./src/styles/login.css);
 @import url(./src/styles/signup.css);
 @import url(./src/styles/home.css);
+@import url(./src/styles/user.css);
 
 
 body{
@@ -168,6 +169,7 @@ box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     display: flex;
     height: 9rem;
     padding: 0.8rem;
+    margin-bottom: 1rem;
 }
 
 .post-user-card-info{
