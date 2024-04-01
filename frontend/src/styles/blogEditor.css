@@ -90,6 +90,10 @@
     margin-top: 1rem;
 }
 
+#text-editor {
+    font-size: 1.15rem;
+}
+
 @media (max-width: 900px) {
     .blog-editor{
         width: 100%;
@@ -98,5 +102,8 @@
     .thumbnail-upload-wrapper {
         width: 100%;
         margin: 0;
+    }
+    #text-editor {
+        margin: 0 3ch;
     }
 }

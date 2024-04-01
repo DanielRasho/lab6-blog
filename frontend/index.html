@@ -1,74 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>BrushWire</title>
-  
-  <!-- FAVICON -->
-  <link rel="shortcut icon" href="./media/brushWireFavicon.png" type="image/x-icon">
-  
-  <!-- STYLES -->
-  <link rel="stylesheet" href="./main.css">
+    <title>BrushWire</title>
 
-  <!-- FONTS : Noto Serif, DM Sans --> 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-  
-  <!-- FONT AWESOME --> 
-  <script src="https://kit.fontawesome.com/42873fe91e.js" crossorigin="anonymous"></script>
+    <!-- FAVICON -->
+    <link
+      rel="shortcut icon"
+      href="./media/brushWireFavicon.png"
+      type="image/x-icon"
+    />
 
-  <!-- React CDN -->
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.min.js"></script>
-  
-  
-  <!-- EDITOR JS CDN -->
- <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
- <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
- <script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest"></script>
- <script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script>
+    <!-- STYLES -->
+    <link rel="stylesheet" href="./main.css" />
 
+    <!-- FONTS : Noto Serif, DM Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- Babel CDN -->
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- FONT AWESOME -->
+    <script
+      src="https://kit.fontawesome.com/42873fe91e.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- React CDN -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.min.js"></script>
+
+    <!-- EDITOR JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/simple-image@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/quote@2.6.0/dist/quote.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/underline@latest"></script>
+
+    <!-- Babel CDN -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   </head>
 
-<body>
+  <body>
+    <div id="root"></div>
 
-<div id="root"></div>
+    <!-- UTILITY -->
+    <script src="./src/router.js" type="text/babel"></script>
+    <script src="./src/auth.js" type="text/babel"></script>
 
-<!-- UTILITY -->
-<script src="./src/router.js" type="text/babel"></script> 
-<script src="./src/auth.js" type="text/babel"></script> 
+    <!-- COMPONENTS -->
+    <script
+      src="./src/components/atoms/ButtonImportant.jsx"
+      type="text/babel"
+    ></script>
+    <script
+      src="./src/components/atoms/ButtonSimple.jsx"
+      type="text/babel"
+    ></script>
+    <script src="./src/components/atoms/PostTag.jsx" type="text/babel"></script>
+    <script src="./src/components/atoms/Footer.jsx" type="text/babel"></script>
+    <script src="./src/components/atoms/Loader.jsx" type="text/babel"></script>
+    <script
+      src="./src/components/atoms/ErrorLoading.jsx"
+      type="text/babel"
+    ></script>
 
-<!-- COMPONENTS -->
-<script src="./src/components/atoms/ButtonImportant.jsx" type="text/babel"></script>
-<script src="./src/components/atoms/ButtonSimple.jsx" type="text/babel"></script>
-<script src="./src/components/atoms/PostTag.jsx" type="text/babel"></script>
-<script src="./src/components/atoms/Footer.jsx" type="text/babel"></script>
-<script src="./src/components/atoms/Loader.jsx" type="text/babel"></script>
-<script src="./src/components/atoms/ErrorLoading.jsx" type="text/babel"></script>
+    <script
+      src="./src/components/molecules/PostCard.jsx"
+      type="text/babel"
+    ></script>
+    <script
+      src="./src/components/molecules/PostUserCard.jsx"
+      type="text/babel"
+    ></script>
+    <script
+      src="./src/components/molecules/TopBar.jsx"
+      type="text/babel"
+    ></script>
 
-<script src="./src/components/molecules/PostCard.jsx" type="text/babel"></script>
-<script src="./src/components/molecules/PostUserCard.jsx" type="text/babel"></script>
-<script src="./src/components/molecules/TopBar.jsx" type="text/babel"></script>
+    <!-- VIEWS -->
+    <script src="./src/views/Home.jsx" type="text/babel"></script>
+    <script src="./src/views/User.jsx" type="text/babel"></script>
+    <script src="./src/views/Login.jsx" type="text/babel"></script>
+    <script src="./src/views/SignUp.jsx" type="text/babel"></script>
+    <script src="./src/views/Post.jsx" type="text/babel"></script>
+    <script src="./src/views/BlogEditor.jsx" type="text/babel"></script>
 
-<!-- VIEWS -->
-<script src="./src/views/Home.jsx" type="text/babel"></script>
-<script src="./src/views/User.jsx" type="text/babel"></script>
-<script src="./src/views/Login.jsx" type="text/babel"></script>
-<script src="./src/views/SignUp.jsx" type="text/babel"></script>
-<script src="./src/views/Post.jsx" type="text/babel"></script>
-<script src="./src/views/BlogEditor.jsx" type="text/babel"></script>
-
-
-<script src="App.jsx" type="text/babel">
-
-</script>
-
-</body>
+    <script src="App.jsx" type="text/babel"></script>
+  </body>
 </html>

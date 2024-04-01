@@ -5,6 +5,7 @@ function BlogEditor({ mode = "create", blogInfo = {} }) {
   const [thumbnailURL, setThumbnailURL] = React.useState("");
 
   const titleRef = React.useRef();
+  const editorRef = React.useRef(null);
 
   const auto_height = () => {
     titleRef.current.style.height = "auto";
@@ -29,13 +30,28 @@ function BlogEditor({ mode = "create", blogInfo = {} }) {
   };
 
   React.useEffect(() => {
-    window.addEventListener("resize", auto_height);
-    return () => {
-      window.removeEventListener("resize", auto_height);
-    };
-  }, []);
+    // EDITOR JS Instance
+    const editorInstance = new EditorJS({
+      holder: "text-editor",
+      placeholder: "Write something, type \"\/\" for input a command",
+      tools: {
+        header: Header,
+        list: List,
+        image: SimpleImage,
+        underline: Underline,
+        quote: {
+            class: Quote,
+            config: {
+                quotePlaceholder: 'Enter a quote',
+                captionPlaceholder: 'Quote\'s author'
+            }
+        }
+      },
+    });
 
-  React.useEffect(() => {
+    editorRef.current = editorInstance;
+
+    // SET TITLE PLACEHOLDER
     switch (mode) {
       case "editor":
         setTitlePlaceholder("Edit Blog");
@@ -44,7 +60,14 @@ function BlogEditor({ mode = "create", blogInfo = {} }) {
         setTitlePlaceholder("Title here...");
         break;
     }
-  });
+
+    // ADD EVENT WHEN RESIZING
+    window.addEventListener("resize", auto_height);
+    return () => {
+      window.removeEventListener("resize", auto_height);
+      editorInstance.destroy();
+    };
+  }, []);
 
   return (
     <div class="blog-editor">
