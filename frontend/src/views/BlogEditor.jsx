@@ -33,19 +33,19 @@ function BlogEditor({ mode = "create", blogInfo = {} }) {
     // EDITOR JS Instance
     const editorInstance = new EditorJS({
       holder: "text-editor",
-      placeholder: "Write something, type \"\/\" for input a command",
+      placeholder: 'Write something, type "/" for input a command',
       tools: {
         header: Header,
         list: List,
         image: SimpleImage,
         underline: Underline,
         quote: {
-            class: Quote,
-            config: {
-                quotePlaceholder: 'Enter a quote',
-                captionPlaceholder: 'Quote\'s author'
-            }
-        }
+          class: Quote,
+          config: {
+            quotePlaceholder: "Enter a quote",
+            captionPlaceholder: "Quote's author",
+          },
+        },
       },
     });
 
@@ -97,6 +97,16 @@ function BlogEditor({ mode = "create", blogInfo = {} }) {
         </div>
       </div>
       <div id="text-editor"></div>
+      <div class="submit-buttons">
+        <button>
+          <span>Delete Draft</span>
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+        <button>
+          <span>Post</span>
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </div>
     </div>
   );
 }

@@ -94,6 +94,46 @@
     font-size: 1.15rem;
 }
 
+.submit-buttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 5rem 0;
+}
+
+.submit-buttons button{
+    padding: 1rem;
+    border-radius: 1rem;
+    transition: all ease-in 0.2s;
+    width: 15ch;
+}
+
+.submit-buttons > :first-child{
+    border: 2px solid var(--orange-500);
+    color: var(--orange-500);
+}
+.submit-buttons > :last-child{
+    border: 2px solid var(--blue-300);
+    color: var(--blue-300);
+}
+
+.submit-buttons > :first-child:hover{
+    background-color: var(--orange-500);
+    border-radius: 1.2rem;
+    color: white;
+}
+.submit-buttons > :last-child:hover{
+    background-color: var(--blue-300);
+    border-radius: 1.2rem;
+    color: white;
+}
+
+.submit-buttons button i {
+    margin-left: 1ch;
+}
+
+
 @media (max-width: 900px) {
     .blog-editor{
         width: 100%;
