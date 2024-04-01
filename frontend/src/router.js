@@ -15,7 +15,7 @@ const ROUTER_CONTEXT = React.createContext({
 });
 
 function RouterProvider({ children }) {
-  const [route, setRoute] = React.useState(VIEW_ROUTES.USER);
+  const [route, setRoute] = React.useState(VIEW_ROUTES.BLOG_EDITOR);
   const [props, setProps] = React.useState({});
 
   const navigate = (route, props={}) => {

@@ -48,7 +48,7 @@ function User() {
         <div class="posts-category">
           <div class="posts-category-header">
             <h2 class="font-display">Posts</h2>
-            <button class="write-btn font-btn-confirmation" onClick={() => navigate(VIEW_ROUTES.BLOG_EDITOR)}>
+            <button class="write-btn font-btn-confirmation" onClick={() => navigate(VIEW_ROUTES.BLOG_EDITOR, {mode:"create"})}>
               <span>Write</span>
               <i class="fa-solid fa-pen-nib"></i>
             </button>
