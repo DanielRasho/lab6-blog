@@ -30,12 +30,11 @@ function BlogEditor({
   };
 
   const handleTitleInput = (event) => {
-    if(editMode == false)
-    setTitle(event.target.value);
+    if (editMode == false) setTitle(event.target.value);
   };
 
   const handleTagInput = (event) => {
-      setTagInput(event.target.value);
+    setTagInput(event.target.value);
   };
 
   const handleCreateTag = (event) => {
@@ -104,8 +103,9 @@ function BlogEditor({
           thumbnail: image64,
           content: JSON.stringify(content),
         }),
-      }).then( response => response.json())
-      .then(data => console.log(data)) 
+      })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
     } catch (error) {
       console.log("something went wrong");
     }
@@ -113,30 +113,38 @@ function BlogEditor({
 
   const handleSendPost = async () => {
     let content = await editorRef.current.save();
-    let thumbnailBase64
+    let thumbnailBase64;
+
     if (!isEmpty(thumbnail)) {
       try {
         const reader = new FileReader();
-        thumbnailBase64 = reader.result;
-        const fileLoadedPromise = new Promise((resolve, reject) => {
-          reader.onload = () => {
-            thumbnailBase64 = reader.result;
-            resolve(thumbnailBase64); // Resolve the promise once the file is loaded
-          };
-          reader.onerror = reject; // Reject the promise in case of an error
-        });
+
+        reader.onload = () => {
+          thumbnailBase64 = reader.result;
+          console.log(thumbnailBase64); // Log the thumbnailBase64 here to ensure it's properly assigned
+          // Once thumbnailBase64 is assigned, proceed with further actions
+          if (editMode) {
+            edit(thumbnailBase64, content);
+          } else {
+            publish(thumbnailBase64, content);
+          }
+        };
+
+        reader.onerror = (error) => {
+          console.error("Error loading file:", error);
+        };
 
         await reader.readAsDataURL(thumbnail);
-        await fileLoadedPromise; // Wait until the file is loaded
       } catch (error) {
         console.error("Error loading file:", error);
       }
-    }
-
-    if (editMode) {
-      edit(thumbnailURL, content);
     } else {
-      publish(thumbnailBase64, content);
+      // If thumbnail is empty, proceed with further actions directly
+      if (editMode) {
+        edit(thumbnailURL, content);
+      } else {
+        publish(thumbnailURL, content);
+      }
     }
   };
 
@@ -185,8 +193,8 @@ function BlogEditor({
           type="textarea"
           placeholder="Title here..."
           maxLength={45}
-          readOnly = {editMode}
-          style={{"cursor": editMode ? "default" : "text"}}
+          readOnly={editMode}
+          style={{ cursor: editMode ? "default" : "text" }}
         />
         <div class="tag-container">
           <input
