@@ -25,7 +25,7 @@ class FileManager {
       fs.mkdirSync(imgDir, { recursive: true })
     }
     const filePath = path.join(imgDir, id + '.jpg') // Assuming image format is jpg
-    fs.writeFileSync(filePath, image, 'base64')
+    fs.writeFileSync(filePath, image)
     return filePath
   }
 
@@ -49,7 +49,7 @@ class FileManager {
   searchImage(owner, id) {
     const filePath = path.join(this.baseDir, owner, 'images', id + '.jpg') // Assuming image format is jpg
     if (fs.existsSync(filePath)) {
-      const image = fs.readFileSync(filePath, 'base64')
+      const image = fs.readFileSync(filePath)
       return image
     } else {
       return null
@@ -58,7 +58,7 @@ class FileManager {
 
   searchImage(filePath) {
     if (fs.existsSync(filePath)) {
-      const image = fs.readFileSync(filePath, 'base64')
+      const image = fs.readFileSync(filePath, 'utf-8')
       return image
     } else {
       return null
