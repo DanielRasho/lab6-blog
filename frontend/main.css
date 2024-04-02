@@ -262,6 +262,7 @@ box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .tag {
+    display: inline-block;
     border: 1px solid #000;
     border-color: rgba(0, 0, 0, .1);
     color: var(--black-3-80);
@@ -270,6 +271,10 @@ box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     border-radius: .5rem;
     padding: .35rem .5rem .2rem;  
     line-height: 1.1;
+}
+.tag i {
+    margin-left: 1ch;
+    cursor: pointer;
 }
 
 

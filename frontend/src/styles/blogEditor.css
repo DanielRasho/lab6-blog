@@ -29,7 +29,8 @@
     margin-bottom: 2rem;
 }
 
-.blog-editor .title::placeholder{
+.blog-editor .title::placeholder,
+.tag-container input::placeholder{
     color: rgb(121, 121, 121);
 }
 
@@ -131,6 +132,38 @@
 
 .submit-buttons button i {
     margin-left: 1ch;
+}
+
+.tag-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2ch;
+}
+
+.tag-container input {
+    
+    padding: none;
+    color: black;
+    background-color: transparent;
+
+    text-align: center;
+    overflow: hidden;
+
+    display: block;
+
+    border: none;
+    border-bottom: 1px solid rgb(121, 121, 121);
+    outline: 2px solid transparent;
+
+    line-height: 1.1;
+    margin-right: 2ch;
+}
+
+.tags-list{
+    margin-top: 1rem;
 }
 
 
