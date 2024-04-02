@@ -1,6 +1,7 @@
 function BlogEditor() {
   const { navigate } = React.useContext(ROUTER_CONTEXT);
   const { token } = React.useContext(AUTH_CONTEXT);
+
   const [title, setTitle] = React.useState("");
   const [thumbnail, setThumbnail] = React.useState({});
   const [thumbnailURL, setThumbnailURL] = React.useState("");
@@ -48,6 +49,12 @@ function BlogEditor() {
       setThumbnailURL(URL.createObjectURL(thumbnailImage));
     }
   };
+  
+  const handleDeleteDraft = (e) => {
+    let confirmation = window.confirm("Do you really want to delete your draft?")
+    if (confirmation)
+      navigate(VIEW_ROUTES.USER)
+  }
 
   const publish = (title, tags, image64, content) => {
     try {
@@ -176,7 +183,7 @@ function BlogEditor() {
       </div>
       <div id="text-editor"></div>
       <div class="submit-buttons">
-        <button>
+        <button onClick={handleDeleteDraft}>
           <span>Delete Draft</span>
           <i class="fa-solid fa-trash-can"></i>
         </button>
