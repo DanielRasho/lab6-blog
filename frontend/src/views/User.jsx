@@ -40,7 +40,25 @@ function User() {
     }
   };
 
-  const handleEditPost = () => {};
+  const handleEditPost = async (id) => {
+    const response = await fetch(`http://localhost:3000/user/posts/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+    const data = await response.json();
+    const post = data.post
+    
+    navigate(VIEW_ROUTES.BLOG_EDITOR, {
+      id: post.id,
+      initTitle: post.title,
+      initTags: post.tags,
+      initThumbnail: post.thumbnail,
+      initContent: JSON.parse(post.content),
+    });
+  };
 
   React.useEffect(() => {
     handleLoadPost();
@@ -91,12 +109,12 @@ function User() {
             {postsInfo.map((post) => {
               return (
                 <PostUserCard
-                  date={post.publishDate}
+                  date={formatDate(post.publishDate)}
                   title={post.title}
                   tags={post.tags}
                   thumbnail={post.thumbnailPath}
-                  onDelete = {() => handleDeletePost(post.id)}
-                  onEdit = {() => handleEditPost(post.id)}
+                  onDelete={() => handleDeletePost(post.id)}
+                  onEdit={() => handleEditPost(post.id)}
                 ></PostUserCard>
               );
             })}

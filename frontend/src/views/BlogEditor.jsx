@@ -1,13 +1,24 @@
-function BlogEditor() {
+function BlogEditor({
+  id = undefined,
+  initTitle = "",
+  initTags = [],
+  initThumbnail = "",
+  initContent = {},
+}) {
   const { navigate } = React.useContext(ROUTER_CONTEXT);
   const { token } = React.useContext(AUTH_CONTEXT);
 
-  const [title, setTitle] = React.useState("");
+  const [title, setTitle] = React.useState(initTitle);
   const [thumbnail, setThumbnail] = React.useState({});
-  const [thumbnailURL, setThumbnailURL] = React.useState("");
+  const [thumbnailURL, setThumbnailURL] = React.useState(initThumbnail);
   const [tagInput, setTagInput] = React.useState("");
-  const [tags, setTags] = React.useState([]);
-  const [content, setContent] = React.useState({});
+  const [tags, setTags] = React.useState(initTags);
+  const [content, setContent] = React.useState(initContent);
+
+  const [editMode, setEditMode] = React.useState(
+    areAllTruthy(id, initTitle, initTags, initThumbnail, initContent)
+  );
+
   const MAX_TAGS = 3;
 
   const titleRef = React.useRef();
@@ -19,11 +30,12 @@ function BlogEditor() {
   };
 
   const handleTitleInput = (event) => {
+    if(editMode == false)
     setTitle(event.target.value);
   };
 
   const handleTagInput = (event) => {
-    setTagInput(event.target.value);
+      setTagInput(event.target.value);
   };
 
   const handleCreateTag = (event) => {
@@ -49,20 +61,21 @@ function BlogEditor() {
       setThumbnailURL(URL.createObjectURL(thumbnailImage));
     }
   };
-  
-  const handleDeleteDraft = (e) => {
-    let confirmation = window.confirm("Do you really want to delete your draft?")
-    if (confirmation)
-      navigate(VIEW_ROUTES.USER)
-  }
 
-  const publish = (title, tags, image64, content) => {
+  const handleDeleteDraft = (e) => {
+    let confirmation = window.confirm(
+      "Do you really want to delete your draft?"
+    );
+    if (confirmation) navigate(VIEW_ROUTES.USER);
+  };
+
+  const publish = (image64, content) => {
     try {
       fetch("http://localhost:3000/user/posts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": token,
+          Authorization: token,
         },
         body: JSON.stringify({
           title: title,
@@ -76,26 +89,54 @@ function BlogEditor() {
     }
   };
 
-  const handlePublishPost = async () => {
-    let content = await editorRef.current.save();
-    const reader = new FileReader();
-    let thumbnailBase64 = reader.result;
-    const fileLoadedPromise = new Promise((resolve, reject) => {
-      reader.onload = () => {
-        thumbnailBase64 = reader.result;
-        resolve(thumbnailBase64); // Resolve the promise once the file is loaded
-      };
-      reader.onerror = reject; // Reject the promise in case of an error
-    });
-
-    await reader.readAsDataURL(thumbnail);
-
+  const edit = (image64, content) => {
     try {
-      await fileLoadedPromise; // Wait until the file is loaded
-      publish(title, tags, thumbnailBase64, content);
-      navigate(VIEW_ROUTES.USER);
+      fetch("http://localhost:3000/user/posts", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+        body: JSON.stringify({
+          id: id,
+          title: title,
+          tags: tags,
+          thumbnail: image64,
+          content: JSON.stringify(content),
+        }),
+      }).then( response => response.json())
+      .then(data => console.log(data)) 
     } catch (error) {
-      console.error("Error loading file:", error);
+      console.log("something went wrong");
+    }
+  };
+
+  const handleSendPost = async () => {
+    let content = await editorRef.current.save();
+    let thumbnailBase64
+    if (!isEmpty(thumbnail)) {
+      try {
+        const reader = new FileReader();
+        thumbnailBase64 = reader.result;
+        const fileLoadedPromise = new Promise((resolve, reject) => {
+          reader.onload = () => {
+            thumbnailBase64 = reader.result;
+            resolve(thumbnailBase64); // Resolve the promise once the file is loaded
+          };
+          reader.onerror = reject; // Reject the promise in case of an error
+        });
+
+        await reader.readAsDataURL(thumbnail);
+        await fileLoadedPromise; // Wait until the file is loaded
+      } catch (error) {
+        console.error("Error loading file:", error);
+      }
+    }
+
+    if (editMode) {
+      edit(thumbnailURL, content);
+    } else {
+      publish(thumbnailBase64, content);
     }
   };
 
@@ -103,6 +144,7 @@ function BlogEditor() {
     // EDITOR JS Instance
     const editorInstance = new EditorJS({
       holder: "text-editor",
+      data: initContent,
       placeholder: 'Write something, type "/" for input a command',
       minHeight: 30,
       tools: {
@@ -143,6 +185,8 @@ function BlogEditor() {
           type="textarea"
           placeholder="Title here..."
           maxLength={45}
+          readOnly = {editMode}
+          style={{"cursor": editMode ? "default" : "text"}}
         />
         <div class="tag-container">
           <input
@@ -187,8 +231,8 @@ function BlogEditor() {
           <span>Delete Draft</span>
           <i class="fa-solid fa-trash-can"></i>
         </button>
-        <button onClick={handlePublishPost}>
-          <span>Post</span>
+        <button onClick={handleSendPost}>
+          <span>{editMode ? "Edit" : "Post"}</span>
           <i class="fa-solid fa-paper-plane"></i>
         </button>
       </div>
@@ -196,4 +240,13 @@ function BlogEditor() {
   );
 }
 
-function createEditor(readonly) {}
+function areAllTruthy(...args) {
+  return args.every((value) => !!value);
+}
+
+function isEmpty(value) {
+  for (let prop in value) {
+    if (value.hasOwnProperty(prop)) return false;
+  }
+  return true;
+}
