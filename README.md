@@ -4,7 +4,7 @@
    A blog for inspired artists</i> </h5>
 </div>
 
-Made with [Node.js](https://nodejs.org/en) and [React](https://es.react.dev/) 
+Made with [Node.js](https://nodejs.org/en) , [React](https://es.react.dev/) and [Docker](https://www.docker.com/)
 
 🔴 **Live API:** Doing..
 
@@ -36,15 +36,17 @@ Made with 💚 by Daniel Rayo
    npm install    # if using npm
    yarn install   # if using yarn
    ```
-5. **Set environment variables:** The API extract important configuration from environment variables declared in a `.env` file. Create one within /backend directory with this variables. You can change them to your like.
+
+4. **Set environment variables:** The API extract important configuration from environment variables declared in a `.env` file. Create one within /backend directory with this variables. You can change them to your like.
+   
    ```bash
    PORT=3000
    LOG_LEVEL='info'
    JWT_SECRET='superSecretPassword'
    STORE_DIR='/path/to/folder/where/blog/files/are/stored'
    ```
-   
-6. **Start API:** Finally you can start the API service by executing:
+
+5. **Start API:** Finally you can start the API service by executing:
    
    ```bash
    npm start      # if using npm
@@ -55,4 +57,8 @@ Made with 💚 by Daniel Rayo
 
 ### Frontend 💫
 
-Working on it...BrushWire
+For now the only way to preview the frontend. Is by running liveServer extension within `./frontend/index.html` 
+
+
+
+> Its a work in progress...
