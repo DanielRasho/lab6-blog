@@ -7,6 +7,7 @@ function User() {
   const [isError, setIsError] = React.useState(false);
 
   React.useEffect(() => {
+    setIsLoading(true);
     fetch("http://localhost:3000/user/posts", {
       method: "GET",
       headers: {
