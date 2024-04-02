@@ -6,7 +6,7 @@ function User() {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isError, setIsError] = React.useState(false);
 
-  React.useEffect(() => {
+  const handleLoadPost = () => {
     setIsLoading(true);
     fetch("http://localhost:3000/user/posts", {
       method: "GET",
@@ -22,6 +22,28 @@ function User() {
       })
       .catch((err) => setIsError(true))
       .finally(() => setIsLoading(false));
+  };
+
+  const handleDeletePost = (id) => {
+    let confirmation = window.confirm(
+      "Do you really want to delete this post?"
+    );
+    if (confirmation) {
+      fetch(`http://localhost:3000/user/posts/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token,
+        },
+      });
+      handleLoadPost();
+    }
+  };
+
+  const handleEditPost = () => {};
+
+  React.useEffect(() => {
+    handleLoadPost();
   }, []);
 
   return (
@@ -69,11 +91,12 @@ function User() {
             {postsInfo.map((post) => {
               return (
                 <PostUserCard
-                  id={1}
                   date={post.publishDate}
                   title={post.title}
                   tags={post.tags}
                   thumbnail={post.thumbnailPath}
+                  onDelete = {() => handleDeletePost(post.id)}
+                  onEdit = {() => handleEditPost(post.id)}
                 ></PostUserCard>
               );
             })}

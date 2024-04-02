@@ -1,4 +1,4 @@
-function PostUserCard({ id, date, title, tags, thumbnail }) {
+function PostUserCard({ date, title, tags, thumbnail, onDelete, onEdit}) {
   let displayTags = tags.map((tag) => {
     return <PostTag>{tag}</PostTag>;
   });
@@ -15,8 +15,8 @@ function PostUserCard({ id, date, title, tags, thumbnail }) {
           {displayTags}
         </div>
         <div class="buttons">
-          <button class="font-btn-confirmation">Edit</button>
-          <button class="font-btn-confirmation">Delete</button>
+          <button onClick={onEdit} class="font-btn-confirmation">Edit</button>
+          <button onClick={onDelete} class="font-btn-confirmation">Delete</button>
         </div>
       </div>
     </article>
