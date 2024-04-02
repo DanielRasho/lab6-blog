@@ -1,5 +1,6 @@
 function BlogEditor() {
   const { navigate } = React.useContext(ROUTER_CONTEXT);
+  const { token } = React.useContext(AUTH_CONTEXT);
   const [title, setTitle] = React.useState("");
   const [thumbnail, setThumbnail] = React.useState({});
   const [thumbnailURL, setThumbnailURL] = React.useState("");
@@ -54,7 +55,7 @@ function BlogEditor() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": localStorage.getItem("token"),
+          "Authorization": token,
         },
         body: JSON.stringify({
           title: title,
