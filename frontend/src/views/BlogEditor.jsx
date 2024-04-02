@@ -1,4 +1,5 @@
 function BlogEditor() {
+  const { navigate } = React.useContext(ROUTER_CONTEXT);
   const [title, setTitle] = React.useState("");
   const [thumbnail, setThumbnail] = React.useState({});
   const [thumbnailURL, setThumbnailURL] = React.useState("");
@@ -48,13 +49,29 @@ function BlogEditor() {
   };
 
   const publish = (title, tags, image64, content) => {
-    fetch();
+    try {
+      fetch("http://localhost:3000/user/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          title: title,
+          tags: tags,
+          thumbnail: image64,
+          content: JSON.stringify(content),
+        }),
+      });
+    } catch (error) {
+      console.log("something went wrong");
+    }
   };
 
   const handlePublishPost = async () => {
     let content = await editorRef.current.save();
     const reader = new FileReader();
-    let  thumbnailBase64 = reader.result;
+    let thumbnailBase64 = reader.result;
     const fileLoadedPromise = new Promise((resolve, reject) => {
       reader.onload = () => {
         thumbnailBase64 = reader.result;
@@ -67,7 +84,8 @@ function BlogEditor() {
 
     try {
       await fileLoadedPromise; // Wait until the file is loaded
-      console.log(title, tags, thumbnailBase64, content);
+      publish(title, tags, thumbnailBase64, content);
+      navigate(VIEW_ROUTES.USER);
     } catch (error) {
       console.error("Error loading file:", error);
     }
