@@ -18,9 +18,9 @@ function RouterProvider({ children }) {
   const [route, setRoute] = React.useState(VIEW_ROUTES.BLOG_EDITOR);
   const [props, setProps] = React.useState({});
 
-  const navigate = (route, props={}) => {
+  const navigate = (route, newProps={}) => {
+    setProps({ ...newProps });
     setRoute(route);
-    setProps({ ...props });
   };
 
   return (
