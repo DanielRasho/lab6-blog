@@ -82,7 +82,7 @@ function BlogEditor({
           thumbnail: image64,
           content: JSON.stringify(content),
         }),
-      });
+      }).then( response => navigate(VIEW_ROUTES.USER));
     } catch (error) {
       console.log("something went wrong");
     }

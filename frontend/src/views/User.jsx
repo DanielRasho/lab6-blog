@@ -17,6 +17,7 @@ function User() {
     })
       .then((response) => response.json())
       .then((data) => {
+        setPostsInfo([]);
         setPostsInfo(data.posts);
         setIsLoading(false);
       })
@@ -35,8 +36,9 @@ function User() {
           "Content-Type": "application/json",
           Authorization: token,
         },
-      });
-      handleLoadPost();
+      }).then(
+        response => handleLoadPost()
+      );
     }
   };
 
