@@ -115,7 +115,8 @@ function BlogEditor({
     let content = await editorRef.current.save();
     let thumbnailBase64;
 
-    if (!isEmpty(thumbnail)) {
+    if (!!thumbnail) {
+      console.log(thumbnail);
       try {
         const reader = new FileReader();
 
